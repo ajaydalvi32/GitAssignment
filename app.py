@@ -69,4 +69,16 @@ if __name__ == '__main__':
         with open('data.json', 'w') as f:
             json.dump([{"id": 1, "message": "Sample data"}], f)
 
+@app.route('/submittodoitem', methods=['POST'])
+def submit_todo():
+    item_name = request.form.get('itemName')
+    item_description = request.form.get('itemDescription')
+    if item_name and item_description:
+        collection.insert_one({
+            "itemName": item_name,
+            "itemDescription": item_description
+        })
+        return "To-Do item submitted successfully!"
+    return "Error: Missing fields"
+
     app.run(debug=True)
