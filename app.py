@@ -29,6 +29,10 @@ def api():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/todo')
+def todo():
+    return render_template('todo.html')
+
 # Home → Shows form
 @app.route('/', methods=['GET', 'POST'])
 def submit():
